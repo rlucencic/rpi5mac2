@@ -120,15 +120,15 @@ static bool start(void)
     bool ii = settings.model == MAC_MODEL_II;
     if (s_cfg.rom_copy == NULL || !rom_store_load(settings.model, s_cfg.rom_copy, &rom_size, &s_rom_name)) {
         static char message[1400];
-        snprintf(message, sizeof(message), "No Macintosh %s ROM: copy it into %s/roms (as %s, or any name).",
-                 ii ? "II" : "LC", emu_data_dir(), ii ? "ii.rom" : "lc.rom");
+        snprintf(message, sizeof(message), "No Macintosh %s ROM: copy it into %s (as %s, or any name).",
+                 ii ? "II" : "LC", emu_rom_dir(), ii ? "ii.rom" : "lc.rom");
         emu_set_message(message);
         return false;
     }
     if (ii && (s_card_rom == NULL || !rom_store_load_card(s_card_rom))) {
         static char message[1400];
         snprintf(message, sizeof(message), "No ROM for the Mac II's video card (the Display Card 8*24's, "
-                 "341-0868): copy it into %s/roms (as mdc824.rom, or any name).", emu_data_dir());
+                 "341-0868): copy it into %s (as mdc824.rom, or any name).", emu_rom_dir());
         emu_set_message(message);
         return false;
     }
@@ -374,7 +374,7 @@ static const disks_size_t sizes[] = {
 };
 
 static const disks_config_t disks = {
-    .folder = "disks",
+    .folder = "mac",
     .extensions = extensions,
     .description = "Disk images (.DSK, .IMG, .IMAGE, .HFV, .ISO, .DMG)",
     .title = "Disks",

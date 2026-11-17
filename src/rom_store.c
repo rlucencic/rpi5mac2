@@ -10,12 +10,12 @@ static const char *TAG = "rom";
 
 static const uint32_t sizes[] = { 512 * 1024, 256 * 1024 };
 
-/* The first file in the data folder's roms/ of that size that `fits` */
+/* The first file in the machine's roms/ folder of that size that `fits` */
 static bool from_folder(uint32_t size, uint8_t *buf, bool (*fits)(const uint8_t *buf, void *arg), void *arg,
                         const char *what)
 {
     char folder[1200];
-    snprintf(folder, sizeof(folder), "%s/roms", emu_data_dir());
+    snprintf(folder, sizeof(folder), "%s", emu_rom_dir());
     DIR *dir = opendir(folder);
     if (dir == NULL) {
         return false;
